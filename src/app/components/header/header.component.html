@@ -4,13 +4,13 @@
     <span class="example-spacer"></span>
     <ul class="header-menu">
       <li>
-        <a routerLink="/">Home Page</a>
+        <a routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">Home Page</a>
       </li>
       <li>
-        <a routerLink="/about">About</a>
+        <a routerLink="/about" routerLinkActive="active">About</a>
       </li>
       <li>
-        <a routerLink="/cards">Cards</a>
+        <a routerLink="/cards" routerLinkActive="active">Cards</a>
       </li>
     </ul>
   </mat-toolbar>
