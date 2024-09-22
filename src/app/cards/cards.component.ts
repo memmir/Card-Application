@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import {CardModalComponent} from './card-modal/card-modal.component';
+import { MatDialog } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-cards',
@@ -7,7 +9,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CardsComponent implements OnInit {
 
-  constructor() { }
+  constructor(private dialog: MatDialog) {
+  }
 
   cardItem = {
     title: 'lorem ipsum',
@@ -20,4 +23,8 @@ export class CardsComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  openAddCardModal(): void{
+
+    this.dialog.open(CardModalComponent);
+  }
 }
