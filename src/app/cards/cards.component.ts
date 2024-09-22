@@ -25,6 +25,8 @@ export class CardsComponent implements OnInit {
 
   openAddCardModal(): void{
 
-    this.dialog.open(CardModalComponent);
+    this.dialog.open(CardModalComponent, {
+      width: '400px',
+    });
   }
 }
