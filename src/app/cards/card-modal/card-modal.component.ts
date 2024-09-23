@@ -4,6 +4,7 @@ import {CardService} from '../../services/card.service';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Card} from '../../models/card';
+import {any} from 'codelyzer/util/function';
 
 @Component({
   selector: 'app-card-modal',
@@ -39,6 +40,8 @@ export class CardModalComponent implements OnInit {
     this.showSpinner = true;
     this.cardService.addCard(this.cardForm.value).subscribe((res: any) => {
       this.getSuccess(res || 'Card Created');
+    }, (err: any) => {
+      this.getError(err.message || 'Error Occured when Creating Card');
     });
   }
 
@@ -47,7 +50,11 @@ export class CardModalComponent implements OnInit {
     this.cardService.updateCard(this.cardForm.value, this.data.id)
       .subscribe((res: any) => {
         this.getSuccess(res || 'Card Updated');
-        });
+        }, (err: any) => {
+          this.getError(err.message || 'Error Occured when Updating Card');
+        }
+
+        );
   }
 
   deleteCard(): void {
@@ -55,7 +62,9 @@ export class CardModalComponent implements OnInit {
     this.cardService.deleteCard(this.cardForm.value)
       .subscribe((res: any) => {
         this.getSuccess(res || 'Card Deleted');
-    });
+    }, (err: any) => {
+        this.getError(err.message || 'Error Occured when Deleting Card');
+      });
   }
 
 
@@ -66,6 +75,15 @@ export class CardModalComponent implements OnInit {
     this.cardService.getCard();
     this.showSpinner = false;
     this.dialogRef.close();
+  }
+
+
+
+  getError(message: string): void{
+    this.snackBar.open(message, '', {
+      duration: 4000,
+    });
+    this.showSpinner = false;
   }
 
 }
