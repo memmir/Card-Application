@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {CardService} from '../../services/card.service';
 import {MatDialogRef} from '@angular/material/dialog';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-card-modal',
@@ -16,6 +17,7 @@ export class CardModalComponent implements OnInit {
     private dialogRef: MatDialogRef<CardModalComponent>,
     private formBuilder: FormBuilder,
     private cardService: CardService,
+    private snackBar: MatSnackBar,
   ) { }
 
   ngOnInit(): void {
@@ -32,7 +34,10 @@ export class CardModalComponent implements OnInit {
     console.log(this.cardForm.value);
     this.cardService.addCard(this.cardForm.value).subscribe((res: any) => {
       console.log(res);
-      this.dialogRef.close();
+      this.snackBar.open(res || 'Card created successfully.', '', {
+        duration: 4000,
+      });
+      this.dialogRef.close(true);
     });
   }
 
