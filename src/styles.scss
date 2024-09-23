@@ -12,4 +12,13 @@ main{
   .page-description{
     color: #777;
   }
+  .mat-snack-bar-container{
+    color: #fff;
+    &.success{
+      background-color: green;
+    }
+    &.error{
+      background-color:crimson;
+    }
+  }
 }

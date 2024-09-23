@@ -5,6 +5,7 @@ import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material/dialog';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {Card} from '../../models/card';
 import {any} from 'codelyzer/util/function';
+import {SnackbarService} from '../../services/snackbar.service';
 
 @Component({
   selector: 'app-card-modal',
@@ -22,6 +23,7 @@ export class CardModalComponent implements OnInit {
     private formBuilder: FormBuilder,
     private cardService: CardService,
     private snackBar: MatSnackBar,
+    private snackbarService: SnackbarService,
     @Inject(MAT_DIALOG_DATA) public data: Card,
   ) { }
 
@@ -69,9 +71,7 @@ export class CardModalComponent implements OnInit {
 
 
   getSuccess(message: string): void{
-    this.snackBar.open(message, '', {
-      duration: 4000,
-    });
+    this.snackbarService.createSnackBar('success', message);
     this.cardService.getCard();
     this.showSpinner = false;
     this.dialogRef.close();
@@ -80,9 +80,7 @@ export class CardModalComponent implements OnInit {
 
 
   getError(message: string): void{
-    this.snackBar.open(message, '', {
-      duration: 4000,
-    });
+    this.snackbarService.createSnackBar('error', message);
     this.showSpinner = false;
   }
 
