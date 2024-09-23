@@ -33,11 +33,12 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <div class="flex-grow-1 text-start" *ngIf="data">
-    <button mat-stroked-button mat-dialog-close color="warn" (click)="deleteCard()" )>Delete</button>
+    <button mat-stroked-button mat-dialog-close color="warn" (click)="deleteCard()" [disabled]="showSpinner">Delete</button>
   </div>
   <div>
     <button mat-button mat-dialog-close color="primary">Discard</button>
-    <button mat-flat-button color="primary" (click)="data ? updateCard() : addCard()" [disabled]="cardForm.invalid">{{data ? 'Update' : 'Create'}}</button>
+    <button mat-flat-button color="primary" (click)="data ? updateCard() : addCard()" [disabled]="cardForm.invalid || showSpinner">{{data ? 'Update' : 'Create'}}</button>
+<!--    show spinner true ise buton disabled olacak.-->
   </div>
 
 </mat-dialog-actions>
