@@ -53,4 +53,15 @@ export class CardModalComponent implements OnInit {
       });
   }
 
+  deleteCard(): void {
+    this.cardService.deleteCard(this.cardForm.value)
+      .subscribe((res: any) => {
+        this.snackBar.open(res || 'Card created successfully.', '', {
+          duration: 4000,
+        });
+        this.cardService.getCard();
+        this.dialogRef.close();
+    });
+  }
+
 }
