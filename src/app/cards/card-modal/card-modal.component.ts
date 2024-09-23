@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {CardService} from '../../services/card.service';
+import {MatDialogRef} from '@angular/material/dialog';
 
 @Component({
   selector: 'app-card-modal',
@@ -11,7 +13,9 @@ export class CardModalComponent implements OnInit {
   cardForm!: FormGroup;
 
   constructor(
+    private dialogRef: MatDialogRef<CardModalComponent>,
     private formBuilder: FormBuilder,
+    private cardService: CardService,
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +30,10 @@ export class CardModalComponent implements OnInit {
 
   addCard(): void {
     console.log(this.cardForm.value);
+    this.cardService.addCard(this.cardForm.value).subscribe((res: any) => {
+      console.log(res);
+      this.dialogRef.close();
+    });
   }
 
 }
