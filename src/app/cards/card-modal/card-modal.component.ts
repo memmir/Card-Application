@@ -38,13 +38,7 @@ export class CardModalComponent implements OnInit {
   addCard(): void {
     this.showSpinner = true;
     this.cardService.addCard(this.cardForm.value).subscribe((res: any) => {
-      console.log(res);
-      this.snackBar.open(res || 'Card created successfully.', '', {
-        duration: 4000,
-      });
-      this.cardService.getCard();
-      this.showSpinner = false;
-      this.dialogRef.close();
+      this.getSuccess(res || 'Card Created');
     });
   }
 
@@ -52,25 +46,26 @@ export class CardModalComponent implements OnInit {
     this.showSpinner = true;
     this.cardService.updateCard(this.cardForm.value, this.data.id)
       .subscribe((res: any) => {
-        console.log(res);
-
-        this.showSpinner = false;
-        this.dialogRef.close();
-      });
+        this.getSuccess(res || 'Card Updated');
+        });
   }
 
   deleteCard(): void {
     this.showSpinner = true;
     this.cardService.deleteCard(this.cardForm.value)
       .subscribe((res: any) => {
-        this.snackBar.open(res || 'Card created successfully.', '', {
-          duration: 4000,
-        });
-        this.cardService.getCard();
-
-        this.showSpinner = false;
-        this.dialogRef.close();
+        this.getSuccess(res || 'Card Deleted');
     });
+  }
+
+
+  getSuccess(message: string): void{
+    this.snackBar.open(message, '', {
+      duration: 4000,
+    });
+    this.cardService.getCard();
+    this.showSpinner = false;
+    this.dialogRef.close();
   }
 
 }
