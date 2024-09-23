@@ -8,8 +8,14 @@
   <mat-card-content>
     <ul class="list-group">
       <li class="list-group-item">{{card.phone}}</li>
-      <li class="list-group-item">{{card.email}}</li>
-      <li class="list-group-item">{{card.address}}</li>
+      <li class="list-group-item">
+      <span *ngIf="card.email">{{card.email}}</span>
+        <small class="text-warning no-content" *ngIf="!card.email">Not Found Email</small>
+      </li>
+      <li class="list-group-item">
+      <span *ngIf="card.address">{{card.address}}</span>
+        <small class="text-warning no-content" *ngIf="!card.address">Not Found Address</small>
+      </li>
     </ul>
   </mat-card-content>
 </mat-card>
